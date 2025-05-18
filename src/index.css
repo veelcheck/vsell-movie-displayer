@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Limelight&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-primary-500: #332d56;
+  --color-primary-500-alpha: #332d56e6;
+  --color-primary-400: #4e6688;
+  --color-secondary-500: #71c0bb;
+  --color-secondary-500-alpha: #71c0bbc9;
+  --color-secondary-400: #e3eeb2;
+
+  --font-Limelight: "Limelight", sans-serif;
+  --font-ABeeZee: "ABeeZee", sans-serif;
+}
