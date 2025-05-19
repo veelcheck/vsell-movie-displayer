@@ -15,4 +15,35 @@
 
   --font-Limelight: "Limelight", sans-serif;
   --font-ABeeZee: "ABeeZee", sans-serif;
+
+  --animate-slide: slide 3s ease-in-out forwards;
+  @keyframes slide {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(20%);
+    }
+    80% {
+      transform: translateX(-2%);
+    }
+    90% {
+      transform: translateX(2%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  --animate-slide-from-bottom: slide-from-bottom 1.5s ease-in-out forwards;
+  @keyframes slide-from-bottom {
+    0% {
+      transform: translateY(100%);
+    }
+    80% {
+      transform: translateY(-2%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 }

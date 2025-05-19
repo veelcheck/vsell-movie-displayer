@@ -80,7 +80,7 @@ const App = () => {
   return (
     <main className="bg-primary-500 dark:bg-dark-primary-500 font-ABeeZee text-secondary-400 min-h-dvh text-center">
       <div className="bg-dark-primary-500 dark:bg-secondary-500 flex w-full items-center justify-center">
-        <h1 className="font-Limelight text-secondary-500 px-6 py-4 text-3xl dark:text-rose-900">
+        <h1 className="font-Limelight text-secondary-500 animate-slide px-6 py-4 text-3xl dark:text-rose-900">
           Fancy a movie?
         </h1>
         <ThemeToggleButton />
@@ -91,7 +91,7 @@ const App = () => {
       >
         <label htmlFor="movie"></label>
         <input
-          className="bg-secondary-400 text-dark-primary-500 border-secondary-500 rounded-md border-2 p-2 focus:outline-rose-900"
+          className="bg-secondary-400 text-dark-primary-500 border-secondary-500 z-10 rounded-md border-2 p-2 focus:outline-rose-900"
           id="movie"
           type="text"
           placeholder="Search by title..."
