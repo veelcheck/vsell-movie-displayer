@@ -4,11 +4,12 @@ import type { MovieListProps } from "../types";
 const MovieList = ({ movies }: MovieListProps) => {
   return (
     <section className="">
-      <ul className="grid gap-4 md:grid-cols-[repeat(auto-fit,300px)] justify-center">
+      <ul className="grid justify-center gap-4 md:grid-cols-[repeat(auto-fit,300px)]">
         {movies.map((movie) => (
           <li
             key={movie.Title}
-            className="rounded-md h-[530px] border border-primary-400 overflow-hidden relative">
+            className="border-primary-400 relative h-[530px] overflow-hidden rounded-md border"
+          >
             <MovieCard
               Title={movie.Title}
               Year={movie.Year}

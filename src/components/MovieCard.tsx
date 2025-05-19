@@ -25,9 +25,7 @@ const MovieCard = ({ Poster, Title, Year }: MovieCardProps) => {
   };
   return (
     <>
-      <h2
-        className="text-xl bg-secondary-500-alpha px-4 py-2 w-full rounded-t-md h-[80px] flex items-center justify-center
-        ">
+      <h2 className="bg-secondary-500-alpha flex h-[80px] w-full items-center justify-center rounded-t-md px-4 py-2 text-xl">
         {Title}
       </h2>
       <div className="">
@@ -40,9 +38,9 @@ const MovieCard = ({ Poster, Title, Year }: MovieCardProps) => {
           alt={
             Poster === "N/A" ? "No photo available" : `movie poster of ${Title}`
           }
-          className="w-full h-auto"
+          className="h-auto w-full"
         />
-        <p className="bg-primary-500-alpha px-4 py-2 absolute bottom-0 w-full rounded-b-md flex justify-between items-center">
+        <p className="bg-primary-500-alpha absolute bottom-0 flex w-full items-center justify-between rounded-b-md px-4 py-2">
           <span>
             <ThumbsDown
               onClick={handleDislike}
