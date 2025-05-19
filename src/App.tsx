@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
+import { LoaderPinwheel } from "lucide-react";
+import axios from "axios";
+
 import "./App.css";
 import MovieList from "./components/MovieList";
 import useDebounce from "./hooks/useDebounce";
-import axios from "axios";
+
 import ThemeToggleButton from "./components/ThemeToggleButton";
 
-function App() {
+const App = () => {
   const [queryTitle, setQueryTitle] = useState<string>("");
   const debounceQuery = useDebounce(queryTitle);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +26,8 @@ function App() {
     const fetchData = async () => {
       if (!debounceQuery) return;
 
+      setIsLoading(true);
+
       try {
         const response = await axios.get(BASE_URL, {
           params: {
@@ -32,7 +38,6 @@ function App() {
         });
 
         if (response.data.Response === "True") {
-          console.log(response.data);
           setMovies(response.data.Search);
           setTotalResults(Number(response.data.totalResults));
           setError(null);
@@ -43,6 +48,8 @@ function App() {
       } catch (error) {
         console.error("Error message:", error);
         setError("Failed to fetch movie, terribly sorry :(");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -84,7 +91,7 @@ function App() {
       >
         <label htmlFor="movie"></label>
         <input
-          className="bg-secondary-400 text-dark-primary-500 border-secondary-500 rounded-md border-2 p-2"
+          className="bg-secondary-400 text-dark-primary-500 border-secondary-500 rounded-md border-2 p-2 focus:outline-rose-900"
           id="movie"
           type="text"
           placeholder="Search by title..."
@@ -93,7 +100,14 @@ function App() {
         ></input>
       </form>
       {error && <p className="text-red-500">{error}</p>}
-      <MovieList movies={movies} />
+
+      {isLoading ? (
+        <div className="flex justify-center py-8">
+          <LoaderPinwheel className="text-dark-primary-500 dark:text-secondary-400 size-20 animate-spin" />
+        </div>
+      ) : (
+        <MovieList movies={movies} />
+      )}
       {movies.length > 0 && (
         <div className="flex justify-center gap-16 p-2">
           <button
@@ -114,6 +128,6 @@ function App() {
       )}
     </main>
   );
-}
+};
 
 export default App;
