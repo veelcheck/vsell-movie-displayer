@@ -3,6 +3,7 @@ import "./App.css";
 import MovieList from "./components/MovieList";
 import useDebounce from "./hooks/useDebounce";
 import axios from "axios";
+import ThemeToggleButton from "./components/ThemeToggleButton";
 
 function App() {
   const [queryTitle, setQueryTitle] = useState<string>("");
@@ -70,16 +71,19 @@ function App() {
   };
 
   return (
-    <main className="bg-primary-500 min-h-dvh text-center p-2 font-ABeeZee text-secondary-400 ">
-      <h1 className="font-Limelight bg-secondary-500 px-6 py-4 rounded-md text-3xl text-rose-900">
-        Fancy a movie? Try the browser!
-      </h1>
+    <main className="bg-primary-500 dark:bg-dark-primary-500 min-h-dvh text-center font-ABeeZee text-secondary-400 ">
+      <div className="flex w-full justify-center bg-dark-primary-500 dark:bg-secondary-500 items-center">
+        <h1 className="font-Limelight px-6 py-4  text-3xl text-secondary-500 dark:text-rose-900">
+          Fancy a movie?
+        </h1>
+        <ThemeToggleButton />
+      </div>
       <form
         className="my-4 flex gap-2 items-center justify-center"
         onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="movie"></label>
         <input
-          className="bg-secondary-400 text-primary-500 p-2 rounded-md border-2 border-secondary-500"
+          className="bg-secondary-400 text-dark-primary-500 p-2 rounded-md border-2 border-secondary-500"
           id="movie"
           type="text"
           placeholder="Search by title..."
