@@ -3,7 +3,7 @@ import type { MovieListProps } from "../types";
 
 const MovieList = ({ movies }: MovieListProps) => {
   return (
-    <section className="animate-slide-from-bottom">
+    <section className="animate-slide-from-bottom min-h-dvh p-4">
       <ul className="grid justify-center gap-4 md:grid-cols-[repeat(auto-fit,300px)]">
         {movies.map((movie) => (
           <li

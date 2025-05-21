@@ -16,7 +16,7 @@
   --font-Limelight: "Limelight", sans-serif;
   --font-ABeeZee: "ABeeZee", sans-serif;
 
-  --animate-slide: slide 3s ease-in-out forwards;
+  --animate-slide: slide 1s ease-in-out forwards;
   @keyframes slide {
     0% {
       transform: translateX(-100%);

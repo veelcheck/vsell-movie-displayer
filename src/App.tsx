@@ -7,6 +7,7 @@ import MovieList from "./components/MovieList";
 import useDebounce from "./hooks/useDebounce";
 
 import ThemeToggleButton from "./components/ThemeToggleButton";
+import usePagination from "./hooks/usePagination";
 
 const App = () => {
   const [queryTitle, setQueryTitle] = useState<string>("");
@@ -18,6 +19,8 @@ const App = () => {
 
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
+
+  const { handleNext, handlePrev } = usePagination({ totalResults, setPage });
 
   useEffect(() => {
     const BASE_URL = "https://www.omdbapi.com/";
@@ -50,6 +53,7 @@ const App = () => {
         setError("Failed to fetch movie, terribly sorry :(");
       } finally {
         setIsLoading(false);
+        setQueryTitle("");
       }
     };
 
@@ -61,26 +65,10 @@ const App = () => {
     setPage(1);
   }, [debounceQuery]);
 
-  const handleNext = () => {
-    setPage((p) => (p < Math.ceil(totalResults / 10) ? p + 1 : p));
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  const handlePrev = () => {
-    setPage((p) => Math.max(p - 1, 1));
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <main className="bg-primary-500 dark:bg-dark-primary-500 font-ABeeZee text-secondary-400 min-h-dvh text-center">
-      <div className="bg-dark-primary-500 dark:bg-secondary-500 flex w-full items-center justify-center">
-        <h1 className="font-Limelight text-secondary-500 animate-slide px-6 py-4 text-3xl dark:text-rose-900">
+      <div className="bg-dark-primary-500 dark:bg-secondary-500 flex w-full items-center justify-center gap-4 p-2">
+        <h1 className="font-Limelight text-secondary-500 animate-slide text-2xl sm:text-3xl dark:text-rose-900">
           Fancy a movie?
         </h1>
         <ThemeToggleButton />
@@ -113,14 +101,14 @@ const App = () => {
           <button
             onClick={handlePrev}
             disabled={page === 1}
-            className="bg-secondary-400 text-primary-500 cursor-pointer rounded-md px-6 py-2 disabled:cursor-not-allowed disabled:bg-gray-300"
+            className="bg-dark-primary-500 text-primary-500 dark:border-primary-500 cursor-pointer rounded-md border px-6 py-2 disabled:hidden dark:border"
           >
             Prev
           </button>
           <button
             onClick={handleNext}
             disabled={page >= Math.ceil(totalResults / 10)}
-            className="bg-secondary-400 text-primary-500 cursor-pointer rounded-md px-6 py-2 disabled:cursor-not-allowed disabled:bg-gray-300"
+            className="bg-dark-primary-500 text-primary-500 dark:border-primary-500 cursor-pointer rounded-md px-6 py-2 disabled:hidden dark:border"
           >
             Next
           </button>
