@@ -53,7 +53,6 @@ const App = () => {
         setError("Failed to fetch movie, terribly sorry :(");
       } finally {
         setIsLoading(false);
-        setQueryTitle("");
       }
     };
 
@@ -77,7 +76,9 @@ const App = () => {
         className="my-4 flex items-center justify-center gap-2"
         onSubmit={(e) => e.preventDefault()}
       >
-        <label htmlFor="movie"></label>
+        <label htmlFor="movie" className="sr-only">
+          Search movies
+        </label>
         <input
           className="bg-secondary-400 text-dark-primary-500 border-secondary-500 z-10 rounded-md border-2 p-2 focus:outline-rose-900"
           id="movie"
@@ -86,6 +87,14 @@ const App = () => {
           value={queryTitle}
           onChange={(e) => setQueryTitle(e.target.value)}
         ></input>
+
+        <button
+          type="button"
+          className="bg-hover text-dark-primary-500 border:dark-primary-500 dark:border-primary-500 cursor-pointer rounded-md border-2 px-6 py-2 font-bold"
+          onClick={() => setQueryTitle("")}
+        >
+          Clear
+        </button>
       </form>
       {error && <p className="text-red-500">{error}</p>}
 
@@ -97,7 +106,7 @@ const App = () => {
         <MovieList movies={movies} />
       )}
       {movies.length > 0 && (
-        <div className="flex justify-center gap-16 p-2">
+        <div className="bg-primary-500-alpha sticky bottom-0 flex justify-center gap-16 p-2">
           <button
             onClick={handlePrev}
             disabled={page === 1}
@@ -107,8 +116,8 @@ const App = () => {
           </button>
           <button
             onClick={handleNext}
-            disabled={page >= Math.ceil(totalResults / 10)}
             className="bg-dark-primary-500 text-primary-500 dark:border-primary-500 cursor-pointer rounded-md px-6 py-2 disabled:hidden dark:border"
+            disabled={page >= Math.ceil(totalResults / 10)}
           >
             Next
           </button>
